@@ -37,10 +37,10 @@
 
     [self addObserver:self forKeyPath:@"PanGestureEnabled" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [self addObserver:self forKeyPath:@"TapGestureEnabled" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-
     
     self.PanGestureEnabled = YES;
     self.TapGestureEnabled = YES;
+    self.tap.enabled = NO;
     
     return self;
 }
@@ -183,6 +183,7 @@
         self.midVC.view.center = CGPointMake(center.x + self.openWidth , center.y);
     } completion:^(BOOL finished) {
         drawerState = DrawerStateLeftOpened;
+        self.tap.enabled = YES;
     }];
 }
 
@@ -196,6 +197,8 @@
         self.midVC.view.center = CGPointMake(center.x - self.openWidth , center.y);
     } completion:^(BOOL finished) {
         drawerState = DrawerStateRightOpened;
+        self.tap.enabled = YES;
+        
     }];
 }
 
@@ -212,6 +215,7 @@
             self.midVC.view.center = CGPointMake(center.x + self.openWidth , center.y);
         } completion:^(BOOL finished) {
             drawerState = DrawerStateLeftOpened;
+            self.tap.enabled = YES;
         }];
     }
 }
@@ -228,6 +232,7 @@
             self.midVC.view.center = CGPointMake(center.x - self.openWidth , center.y);
         } completion:^(BOOL finished) {
             drawerState = DrawerStateRightOpened;
+            self.tap.enabled = YES;
         }];
     }
 }
@@ -239,6 +244,7 @@
         self.midVC.view.center = self.view.center;
     } completion:^(BOOL finished) {
         drawerState = DrawerStateNormal;
+        self.tap.enabled = NO;
     }];
 }
 
